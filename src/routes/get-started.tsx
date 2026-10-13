@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PlaceholderPage } from "@/components/landing/placeholder-page";
 
-type Search = { as?: "talent" | "organisation" };
+type Search = { as?: "talent" | "organisation" | undefined };
 
 export const Route = createFileRoute("/get-started")({
-  validateSearch: (s: Record<string, unknown>): Search => ({
-    as: s.as === "talent" || s.as === "organisation" ? s.as : undefined,
-  }),
+  validateSearch: (s: Record<string, unknown>): Search => {
+    const v = s["as"];
+    return { as: v === "talent" || v === "organisation" ? v : undefined };
+  },
   head: () => ({
     meta: [
       { title: "Get started — Foundareer" },
