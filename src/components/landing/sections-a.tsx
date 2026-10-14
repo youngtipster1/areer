@@ -20,10 +20,10 @@ export function Hero() {
           <h1 id="hero-title" className="type-display text-balance">
             Your potential deserves a <span className="accent-rule">place to grow.</span>
           </h1>
-          <p className="type-body-lg mt-7 max-w-[34rem] text-muted-foreground">
+          <p className="type-body-lg mt-5 max-w-[34rem] text-muted-foreground">
             Discover meaningful opportunities to contribute, demonstrate what you can do, and build the future you're working towards.
           </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg">
               <Link to="/get-started" search={{ as: "talent" }}>Find Your Opportunity<ArrowRight /></Link>
             </Button>
@@ -94,12 +94,12 @@ function ConnectionScene() {
 export function Problem() {
   return (
     <section id="about" aria-labelledby="problem-title" className="scroll-mt-16 bg-primary text-primary-foreground">
-      <Container className="py-24 sm:py-36">
+      <Container className="py-16 sm:py-24">
         <p className="type-overline opacity-60">The challenge</p>
         <h2 id="problem-title" className="mt-6 max-w-4xl font-display text-[2.25rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-6xl">
           There is more to your potential than your résumé.
         </h2>
-        <div className="mt-16 grid gap-10 border-t border-primary-foreground/15 pt-10 md:grid-cols-12">
+        <div className="mt-10 grid gap-8 border-t border-primary-foreground/15 pt-10 md:grid-cols-12">
           <p className="type-body-lg opacity-80 md:col-span-5">
             Job titles and past roles tell only part of the story. They miss what you can actually do, where you're heading, and the value you could bring.
           </p>
@@ -146,19 +146,19 @@ export function Approach() {
   ];
   return (
     <section aria-labelledby="approach-title">
-      <Container className="py-24 sm:py-36">
+      <Container className="py-16 sm:py-24">
         <div className="grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="type-overline text-muted-foreground">A different approach</p>
             <h2 id="approach-title" className="type-h1 mt-5 text-balance">Connect what you can do with what the world needs.</h2>
           </div>
         </div>
-        <ol className="relative mt-20 grid gap-12 md:grid-cols-4 md:gap-8">
+        <ol className="relative mt-12 grid gap-10 md:grid-cols-4 md:gap-8">
           <span aria-hidden className="absolute left-0 right-0 top-[7px] hidden h-px bg-border-strong md:block" />
           {steps.map(([t, d], i) => (
             <li key={t} className="relative flex gap-5 md:block">
               <span aria-hidden className={`relative mt-1 block size-[15px] shrink-0 rounded-full border-2 md:mt-0 ${i === 3 ? "border-foreground bg-accent" : "border-foreground bg-background"}`} />
-              <div className="md:mt-8">
+              <div className="md:mt-6">
                 <span className="font-display text-sm font-bold text-muted-foreground">0{i + 1}</span>
                 <h3 className="type-h2 mt-1">{t}</h3>
                 <p className="mt-2 max-w-[16rem] text-muted-foreground">{d}</p>
@@ -166,7 +166,7 @@ export function Approach() {
             </li>
           ))}
         </ol>
-        <a href="#how-it-works" className="mt-16 inline-flex items-center gap-1.5 text-sm font-semibold underline-offset-4 hover:underline">
+        <a href="#how-it-works" className="mt-10 inline-flex items-center gap-1.5 text-sm font-semibold underline-offset-4 hover:underline">
           See how it works<ArrowUpRight className="size-4" />
         </a>
       </Container>

@@ -16,7 +16,7 @@ function AudienceRow({
 }) {
   return (
     <article id={id} aria-labelledby={`${id}-title`} className="scroll-mt-20">
-      <Container className="grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-12 lg:gap-16">
+      <Container className="grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-12 lg:gap-12">
         <div className={`lg:col-span-6 ${reverse ? "lg:order-2" : ""}`}>
           <img src={img} alt={alt} loading="lazy" width={1200} height={1408}
             className="aspect-[4/3] w-full rounded-xl object-cover grayscale-[35%] lg:aspect-[5/6]" />
@@ -28,7 +28,7 @@ function AudienceRow({
           <ul className="mt-8 space-y-3 border-l-2 border-accent pl-5">
             {points.map((p) => <li key={p} className="font-medium">{p}</li>)}
           </ul>
-          <Button asChild size="lg" variant="outline" className="mt-10">
+          <Button asChild size="lg" variant="outline" className="mt-8">
             <Link to="/get-started" search={{ as }}>{cta}<ArrowRight /></Link>
           </Button>
         </div>
@@ -76,7 +76,7 @@ export function HowItWorks() {
         </div>
         <ol className="lg:col-span-7 lg:col-start-6">
           {steps.map(([t, d], i) => (
-            <li key={t} className="grid grid-cols-[3.5rem_1fr] items-baseline gap-4 border-t border-border py-8 last:border-b sm:grid-cols-[5rem_1fr]">
+            <li key={t} className="grid grid-cols-[3.5rem_1fr] items-baseline gap-4 border-t border-border py-6 last:border-b sm:grid-cols-[5rem_1fr]">
               <span className="font-display text-3xl font-extrabold tracking-tight text-muted-foreground sm:text-4xl">0{i + 1}</span>
               <div>
                 <h3 className="type-h2">{t}</h3>
@@ -105,7 +105,7 @@ export function Different() {
         <h2 id="diff-title" className="max-w-4xl font-display text-[2.25rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-6xl">
           Built around <span className="text-accent">contribution</span>, not just credentials.
         </h2>
-        <dl className="mt-20 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {items.map(([t, d]) => (
             <div key={t} className="border-t border-primary-foreground/20 pt-6">
               <dt className="font-display text-lg font-bold">{t}</dt>
@@ -134,7 +134,7 @@ export function Trust() {
           <h2 id="trust-title" className="type-h1 mt-5 text-balance">Clarity creates better connections.</h2>
           <p className="mt-6 max-w-md text-muted-foreground">These are the principles we're designing around. They're in progress, not yet live.</p>
         </div>
-        <ul className="space-y-10 lg:col-span-6 lg:col-start-7">
+        <ul className="space-y-8 lg:col-span-6 lg:col-start-7">
           {items.map(([t, d]) => (
             <li key={t}>
               <h3 className="type-h3">{t}</h3>
@@ -152,11 +152,11 @@ export function Trust() {
 export function Closing() {
   return (
     <section aria-labelledby="close-title" className="border-t border-border">
-      <Container className="py-28 sm:py-40">
+      <Container className="py-16 sm:py-24">
         <h2 id="close-title" className="max-w-5xl font-display text-[2.5rem] font-extrabold leading-[1.02] tracking-tight text-balance sm:text-7xl">
           Your next opportunity starts with what you can <span className="accent-rule">contribute.</span>
         </h2>
-        <div className="mt-14 flex flex-col gap-3 sm:flex-row">
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
           <Button asChild size="lg">
             <Link to="/get-started" search={{ as: "talent" }}>Get Started as Talent<ArrowRight /></Link>
           </Button>
