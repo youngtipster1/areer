@@ -1,17 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LandingNav } from "@/components/landing/nav";
-import { Hero, Problem, Approach } from "@/components/landing/sections-a";
-import { Audiences, HowItWorks, Different, Trust, Closing, LandingFooter } from "@/components/landing/sections-b";
+import { Hero, Problem, TalentSection } from "@/components/landing/sections-a";
+import { FounderSection, Opportunities, HowItWorks, Different, Closing, LandingFooter } from "@/components/landing/sections-b";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Foundareer — Turn your capabilities into meaningful opportunities" },
+      { title: "Foundareer — Find your place in the work that matters" },
       {
         name: "description",
         content: "Foundareer connects people with founders and organisations based on what they can contribute, what they want to achieve and what the work requires.",
       },
-      { property: "og:title", content: "Foundareer — Your potential deserves a place to grow" },
+      { property: "og:title", content: "Foundareer — Find your place in the work that matters" },
       { property: "og:description", content: "Connecting capabilities and ambitions with founders who need people like you." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -30,11 +30,11 @@ function Landing() {
       <main id="main">
         <Hero />
         <Problem />
-        <Approach />
-        <Audiences />
+        <TalentSection />
+        <FounderSection />
+        <Opportunities />
         <HowItWorks />
         <Different />
-        <Trust />
         <Closing />
       </main>
       <LandingFooter />

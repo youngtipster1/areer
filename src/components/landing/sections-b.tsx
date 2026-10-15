@@ -1,59 +1,143 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, Target, Users, MessageSquare, FileText, Lightbulb, Code2, PenTool, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Container } from "./sections-a";
+import { Badge } from "@/components/ui/badge";
+import { Container, Eyebrow, Cap, Initials } from "./sections-a";
 import { Wordmark } from "./nav";
-import talentImg from "@/assets/talent.jpg";
-import foundersImg from "@/assets/founders.jpg";
 
-/* ---------------- Audiences ---------------- */
+/* ---------------- Founder experience ---------------- */
 
-function AudienceRow({
-  id, label, title, copy, points, cta, as, img, alt, reverse,
-}: {
-  id: string; label: string; title: string; copy: string; points: string[]; cta: string;
-  as: "talent" | "organisation"; img: string; alt: string; reverse?: boolean;
-}) {
+export function FounderSection() {
+  const items = [
+    ["Define", "a project or initiative."],
+    ["Explain", "the outcome and contribution needed."],
+    ["Separate", "required capabilities from helpful ones."],
+    ["Discover", "relevant people and review their evidence."],
+    ["Understand", "alignment before expressing interest."],
+    ["Start", "a conversation around the actual work."],
+  ];
   return (
-    <article id={id} aria-labelledby={`${id}-title`} className="scroll-mt-20">
-      <Container className="grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-12 lg:gap-12">
-        <div className={`lg:col-span-6 ${reverse ? "lg:order-2" : ""}`}>
-          <img src={img} alt={alt} loading="lazy" width={1200} height={1408}
-            className="aspect-[4/3] w-full rounded-xl object-cover grayscale-[35%] lg:aspect-[5/6]" />
+    <section id="organisations" aria-labelledby="org-title" className="scroll-mt-16 bg-secondary">
+      <Container className="py-16 sm:py-20">
+        <div className="grid gap-6 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <Eyebrow>For founders & organisations</Eyebrow>
+            <h2 id="org-title" className="type-h1 mt-4 text-balance">Find people who can help you get the work done.</h2>
+          </div>
+          <p className="type-body-lg text-muted-foreground lg:col-span-5 lg:self-end">
+            Describe what you are building, the contribution you need, and the capabilities that matter. Discover people who could help you make progress, whether you are developing a product, running a project, or growing an organisation.
+          </p>
         </div>
-        <div className={`lg:col-span-5 ${reverse ? "lg:order-1 lg:col-start-1" : "lg:col-start-8"}`}>
-          <p className="type-overline text-muted-foreground">{label}</p>
-          <h3 id={`${id}-title`} className="type-h1 mt-5 text-balance">{title}</h3>
-          <p className="type-body-lg mt-6 text-muted-foreground">{copy}</p>
-          <ul className="mt-8 space-y-3 border-l-2 border-accent pl-5">
-            {points.map((p) => <li key={p} className="font-medium">{p}</li>)}
+
+        <div className="mt-10 grid gap-4 lg:grid-cols-12">
+          {/* Need definition */}
+          <div className="rounded-xl border border-border bg-card p-5 shadow-sm sm:p-6 lg:col-span-5">
+            <div className="flex items-center justify-between gap-3">
+              <p className="type-overline text-muted-foreground">Your need</p>
+              <Badge variant="secondary">Draft</Badge>
+            </div>
+            <p className="type-h3 mt-3">Validate demand for a farm-to-market delivery app</p>
+            <p className="mt-2 text-sm text-muted-foreground"><Target className="mr-1 inline size-3.5" aria-hidden />Outcome: 20 farmer interviews and a summary of what to build first.</p>
+            <p className="type-overline mb-2 mt-5 text-muted-foreground">Required</p>
+            <div className="flex flex-wrap gap-1.5"><Cap name="User interviews" /><Cap name="Research synthesis" /><Cap name="Yoruba or Hausa" /></div>
+            <p className="type-overline mb-2 mt-4 text-muted-foreground">Helpful</p>
+            <div className="flex flex-wrap gap-1.5"><Cap name="Agriculture" level="helpful" /><Cap name="Survey design" level="helpful" /></div>
+            <p className="type-small mt-5 inline-flex items-center gap-1 text-muted-foreground"><Clock className="size-3.5" />10 hrs / week · 6 weeks</p>
+          </div>
+
+          {/* Contributors */}
+          <div className="rounded-xl border border-border bg-card p-5 shadow-sm sm:p-6 lg:col-span-7">
+            <div className="flex items-center justify-between gap-3">
+              <p className="type-overline text-muted-foreground">People who could help</p>
+              <span className="type-small text-muted-foreground"><Users className="mr-1 inline size-3.5" aria-hidden />Sample results</span>
+            </div>
+            <ul className="mt-3 divide-y divide-border">
+              {[
+                { i: "TO", n: "Tunde Okafor", r: "Economics graduate · field research", m: ["User interviews", "Yoruba"], g: "Research synthesis", ev: 3 },
+                { i: "FA", n: "Fatima Abubakar", r: "Corps member · survey & data", m: ["Research synthesis", "Hausa"], g: "User interviews", ev: 2 },
+                { i: "KE", n: "Kelechi Eze", r: "Agritech volunteer", m: ["User interviews", "Agriculture"], g: "Yoruba or Hausa", ev: 4 },
+              ].map((p, idx) => (
+                <li key={p.n} className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center">
+                  <div className="flex min-w-0 flex-1 items-center gap-3">
+                    <Initials text={p.i} tone={idx === 0 ? "accent" : "muted"} />
+                    <div className="min-w-0">
+                      <p className="truncate font-medium">{p.n}</p>
+                      <p className="type-small truncate text-muted-foreground">{p.r}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {p.m.map((c) => <Cap key={c} name={c} level="met" />)}
+                    <Cap name={p.g} level="gap" />
+                  </div>
+                  <span className="type-small inline-flex shrink-0 items-center gap-1 text-muted-foreground"><FileText className="size-3.5" />{p.ev} evidence</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-2 flex items-center gap-2 rounded-md bg-muted p-3 text-sm">
+              <MessageSquare className="size-4 shrink-0" aria-hidden />
+              <span>Start a conversation about the interviews with Tunde.</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-10 grid gap-8 lg:grid-cols-12">
+          <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:col-span-9">
+            {items.map(([v, r]) => (
+              <li key={v} className="border-l-2 border-accent pl-4"><span className="font-semibold">{v}</span> <span className="text-muted-foreground">{r}</span></li>
+            ))}
           </ul>
-          <Button asChild size="lg" variant="outline" className="mt-8">
-            <Link to="/get-started" search={{ as }}>{cta}<ArrowRight /></Link>
-          </Button>
+          <div className="lg:col-span-3 lg:text-right">
+            <Button asChild size="lg">
+              <Link to="/get-started" search={{ as: "organisation" }}>Find Contributors<ArrowRight /></Link>
+            </Button>
+          </div>
         </div>
       </Container>
-    </article>
+    </section>
   );
 }
 
-export function Audiences() {
+/* ---------------- Opportunities ---------------- */
+
+export function Opportunities() {
+  const ops = [
+    { I: Lightbulb, org: "Early-stage startup", t: "Help validate a product idea", c: "Run customer conversations and summarise what you learn.", caps: ["User interviews", "Note-taking"], time: "5 hrs / week · 4 weeks", out: "A clear go / no-go recommendation" },
+    { I: PenTool, org: "Student-led project", t: "Design the onboarding for a study app", c: "Turn rough sketches into a tested first-run flow.", caps: ["Interaction design", "Prototyping"], time: "8 hrs / week · 6 weeks", out: "A prototype tested with 5 students" },
+    { I: Code2, org: "Social enterprise", t: "Build a simple donor dashboard", c: "Connect existing spreadsheets to a readable web view.", caps: ["JavaScript", "Data handling"], time: "10 hrs / week · 6 weeks", out: "A working internal dashboard" },
+    { I: Building2, org: "Small business", t: "Launch a weekend sales initiative", c: "Plan and track a social campaign with the owner.", caps: ["Social media", "Basic analytics"], time: "6 hrs / week · 4 weeks", out: "A repeatable campaign playbook" },
+  ];
   return (
-    <section aria-label="Who Foundareer is for" className="border-t border-border">
-      <AudienceRow
-        id="talent" label="For talent" title="Your experience is still being written."
-        copy="Build a professional identity around your capabilities, show what you can do, and discover opportunities that help you grow."
-        points={["Capabilities, not just titles", "Projects as evidence", "Opportunities that explain the fit"]}
-        cta="Explore Opportunities" as="talent" img={talentImg} alt="A designer sketching interface ideas at her desk"
-      />
-      <div className="bg-secondary">
-        <AudienceRow
-          id="organisations" label="For founders & organisations" title="Build with the right people."
-          copy="Define the contribution you need, discover relevant capabilities, and connect with people who can help move your goals forward."
-          points={["Needs framed around outcomes", "Required and helpful capabilities", "People beyond résumé filters"]}
-          cta="Find Contributors" as="organisation" img={foundersImg} alt="Founders and a contributor planning work on a wall of notes" reverse
-        />
-      </div>
+    <section aria-labelledby="ops-title" className="bg-primary text-primary-foreground">
+      <Container className="py-16 sm:py-20">
+        <div className="grid gap-6 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <p className="type-overline opacity-60">What opportunities look like</p>
+            <h2 id="ops-title" className="mt-4 font-display text-[2rem] font-extrabold leading-[1.08] tracking-tight text-balance sm:text-5xl">
+              Not just job titles. <span className="text-accent">Real work</span> to contribute to.
+            </h2>
+          </div>
+          <p className="opacity-75 lg:col-span-5 lg:self-end">
+            Opportunities on Foundareer can be organised around projects, initiatives and specific outcomes — so you know what you'd actually do, what it needs, and what success looks like. The examples below are illustrative.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {ops.map(({ I, org, t, c, caps, time, out }) => (
+            <article key={t} className="flex flex-col rounded-xl bg-card p-5 text-card-foreground sm:p-6">
+              <div className="flex items-center gap-3">
+                <span className="grid size-10 place-items-center rounded-md bg-accent-soft text-accent-ink"><I className="size-5" aria-hidden /></span>
+                <p className="type-overline text-muted-foreground">{org}</p>
+              </div>
+              <h3 className="type-h3 mt-4">{t}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{c}</p>
+              <div className="mt-4 flex flex-wrap gap-1.5">{caps.map((x) => <Cap key={x} name={x} />)}</div>
+              <dl className="type-small mt-auto grid grid-cols-2 gap-3 border-t border-border pt-4 [&:not(:first-child)]:mt-5">
+                <div><dt className="text-muted-foreground">Commitment</dt><dd className="font-medium">{time}</dd></div>
+                <div><dt className="text-muted-foreground">Outcome</dt><dd className="font-medium">{out}</dd></div>
+              </dl>
+            </article>
+          ))}
+        </div>
+      </Container>
     </section>
   );
 }
@@ -62,26 +146,22 @@ export function Audiences() {
 
 export function HowItWorks() {
   const steps = [
-    ["Build your identity.", "Capabilities, evidence, interests and direction in one place."],
-    ["Discover possibilities.", "Explore opportunities or people based on what the work needs."],
-    ["Understand the fit.", "See where you align, where the gaps are, and how to prepare."],
-    ["Connect and contribute.", "Start a conversation and work towards a shared outcome."],
+    ["Show what you bring.", "Build your identity, capabilities, and evidence."],
+    ["Find relevant opportunities or people.", "Explore work and contributors that align with your needs and interests."],
+    ["Understand the alignment.", "Review relevant strengths, expectations, and potential gaps."],
+    ["Connect and contribute.", "Express interest, start a conversation, and work towards an outcome."],
   ];
   return (
     <section id="how-it-works" aria-labelledby="how-title" className="scroll-mt-16">
-      <Container className="grid gap-14 py-24 sm:py-36 lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <p className="type-overline text-muted-foreground">How it works</p>
-          <h2 id="how-title" className="type-h1 mt-5 text-balance">Four steps, either side.</h2>
-        </div>
-        <ol className="lg:col-span-7 lg:col-start-6">
+      <Container className="py-16 sm:py-20">
+        <Eyebrow>How it works</Eyebrow>
+        <h2 id="how-title" className="type-h1 mt-4 max-w-3xl text-balance">From discovering the right fit to doing meaningful work.</h2>
+        <ol className="mt-10 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {steps.map(([t, d], i) => (
-            <li key={t} className="grid grid-cols-[3.5rem_1fr] items-baseline gap-4 border-t border-border py-6 last:border-b sm:grid-cols-[5rem_1fr]">
-              <span className="font-display text-3xl font-extrabold tracking-tight text-muted-foreground sm:text-4xl">0{i + 1}</span>
-              <div>
-                <h3 className="type-h2">{t}</h3>
-                <p className="mt-2 text-muted-foreground">{d}</p>
-              </div>
+            <li key={t} className="bg-card p-5 sm:p-6">
+              <span className={`grid size-9 place-items-center rounded-full font-display text-sm font-bold ${i === 3 ? "bg-accent text-accent-foreground" : "bg-primary text-primary-foreground"}`}>{i + 1}</span>
+              <h3 className="type-h3 mt-4">{t}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{d}</p>
             </li>
           ))}
         </ol>
@@ -93,52 +173,26 @@ export function HowItWorks() {
 /* ---------------- Different ---------------- */
 
 export function Different() {
-  const items = [
-    ["Capabilities", "What someone can do, not what their last role was called."],
-    ["Evidence", "Work and projects that support every claim."],
-    ["Context", "Fit weighs direction and readiness, not only requirements."],
-    ["Outcomes", "The connection is where contribution begins."],
+  const rows = [
+    ["More than a résumé.", "Capabilities, projects, interests, and evidence can help tell a fuller story.", "Job titles · Years"],
+    ["More than a job title.", "Opportunities can describe the contribution and outcome a team needs.", "“Intern wanted”"],
+    ["More than a profile match.", "Relevant context, expectations, and readiness matter alongside capabilities.", "Keyword match"],
   ];
   return (
-    <section aria-labelledby="diff-title" className="bg-primary text-primary-foreground">
-      <Container className="py-24 sm:py-36">
-        <h2 id="diff-title" className="max-w-4xl font-display text-[2.25rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-6xl">
-          Built around <span className="text-accent">contribution</span>, not just credentials.
-        </h2>
-        <dl className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map(([t, d]) => (
-            <div key={t} className="border-t border-primary-foreground/20 pt-6">
-              <dt className="font-display text-lg font-bold">{t}</dt>
-              <dd className="mt-2 text-sm opacity-70">{d}</dd>
-            </div>
-          ))}
-        </dl>
-      </Container>
-    </section>
-  );
-}
-
-/* ---------------- Trust ---------------- */
-
-export function Trust() {
-  const items = [
-    ["Clear expectations", "What the work involves, how long it runs, and what a good outcome looks like."],
-    ["Relevant evidence", "Capabilities shown next to the work that supports them."],
-    ["Honest signals", "We'll say exactly what has — and hasn't — been verified."],
-  ];
-  return (
-    <section aria-labelledby="trust-title">
-      <Container className="grid gap-14 py-24 sm:py-36 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <p className="type-overline text-muted-foreground">Trust</p>
-          <h2 id="trust-title" className="type-h1 mt-5 text-balance">Clarity creates better connections.</h2>
-          <p className="mt-6 max-w-md text-muted-foreground">These are the principles we're designing around. They're in progress, not yet live.</p>
+    <section aria-labelledby="diff-title" className="border-t border-border bg-secondary">
+      <Container className="grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <Eyebrow>Why Foundareer</Eyebrow>
+          <h2 id="diff-title" className="type-h1 mt-4 text-balance">A better starting point for finding the right fit.</h2>
         </div>
-        <ul className="space-y-8 lg:col-span-6 lg:col-start-7">
-          {items.map(([t, d]) => (
-            <li key={t}>
-              <h3 className="type-h3">{t}</h3>
-              <p className="mt-2 text-muted-foreground">{d}</p>
+        <ul className="divide-y divide-border border-y border-border lg:col-span-8">
+          {rows.map(([t, d, old]) => (
+            <li key={t} className="grid gap-2 py-5 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-6">
+              <div>
+                <h3 className="type-h3">{t}</h3>
+                <p className="mt-1 text-muted-foreground">{d}</p>
+              </div>
+              <span className="type-small text-muted-foreground line-through decoration-accent-ink/60">{old}</span>
             </li>
           ))}
         </ul>
@@ -151,18 +205,24 @@ export function Trust() {
 
 export function Closing() {
   return (
-    <section aria-labelledby="close-title" className="border-t border-border">
-      <Container className="py-16 sm:py-24">
-        <h2 id="close-title" className="max-w-5xl font-display text-[2.5rem] font-extrabold leading-[1.02] tracking-tight text-balance sm:text-7xl">
-          Your next opportunity starts with what you can <span className="accent-rule">contribute.</span>
-        </h2>
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <Button asChild size="lg">
-            <Link to="/get-started" search={{ as: "talent" }}>Get Started as Talent<ArrowRight /></Link>
-          </Button>
-          <Button asChild size="lg" variant="outline">
-            <Link to="/get-started" search={{ as: "organisation" }}>I'm Building a Team</Link>
-          </Button>
+    <section aria-labelledby="close-title">
+      <Container className="py-16 sm:py-20">
+        <h2 id="close-title" className="type-h1 text-center text-balance sm:text-5xl">What could you <span className="accent-rule">contribute</span> next?</h2>
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          <div className="flex flex-col rounded-xl bg-primary p-6 text-primary-foreground sm:p-8">
+            <p className="type-overline opacity-60">For talent</p>
+            <p className="mt-3 font-display text-xl font-bold leading-snug">Discover work that helps you demonstrate your capabilities and move forward.</p>
+            <Button asChild size="lg" className="mt-6 self-start bg-accent text-accent-foreground hover:bg-accent/90">
+              <Link to="/get-started" search={{ as: "talent" }}>Find Opportunities<ArrowRight /></Link>
+            </Button>
+          </div>
+          <div className="flex flex-col rounded-xl border border-border bg-card p-6 sm:p-8">
+            <p className="type-overline text-muted-foreground">For founders & organisations</p>
+            <p className="mt-3 font-display text-xl font-bold leading-snug">Find people whose capabilities can help turn your plans into progress.</p>
+            <Button asChild size="lg" className="mt-6 self-start">
+              <Link to="/get-started" search={{ as: "organisation" }}>Find Contributors<ArrowRight /></Link>
+            </Button>
+          </div>
         </div>
       </Container>
     </section>
@@ -172,28 +232,27 @@ export function Closing() {
 /* ---------------- Footer ---------------- */
 
 export function LandingFooter() {
-  const platform = [
+  const links = [
+    ["#how-it-works", "How It Works"],
     ["#talent", "For Talent"],
     ["#organisations", "For Organisations"],
-    ["#how-it-works", "How It Works"],
     ["#about", "About"],
   ];
   return (
     <footer className="border-t border-border">
-      <Container className="flex flex-col gap-10 py-14 md:flex-row md:items-start md:justify-between">
+      <Container className="flex flex-col gap-8 py-10 md:flex-row md:items-start md:justify-between">
         <div>
           <Wordmark />
-          <p className="mt-3 max-w-xs text-sm text-muted-foreground">Connecting people with founders through what they can contribute.</p>
+          <p className="mt-2 max-w-xs text-sm text-muted-foreground">Opportunities built around what people can contribute — for talent and the teams who need them.</p>
         </div>
         <nav aria-label="Footer">
           <ul className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
-            {platform.map(([h, l]) => (
-              <li key={h}><a href={h} className="text-muted-foreground hover:text-foreground">{l}</a></li>
-            ))}
+            {links.map(([h, l]) => <li key={h}><a href={h} className="text-muted-foreground hover:text-foreground">{l}</a></li>)}
+            <li><Link to="/sign-in" className="text-muted-foreground hover:text-foreground">Sign In</Link></li>
           </ul>
         </nav>
       </Container>
-      <Container className="type-small border-t border-border py-6 text-muted-foreground">© {new Date().getFullYear()} Foundareer. Prototype for review.</Container>
+      <Container className="type-small border-t border-border py-5 text-muted-foreground">© {new Date().getFullYear()} Foundareer. Prototype — examples shown are illustrative.</Container>
     </footer>
   );
 }
