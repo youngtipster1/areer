@@ -123,7 +123,7 @@ function HeroProduct() {
             <ul className="mt-3 space-y-2.5">
               {[["AB", "Amina B.", "3/4", "accent"], ["TO", "Tunde O.", "3/4", "muted"], ["CE", "Chiamaka E.", "2/4", "muted"]].map(([i, n, f, t]) => (
                 <li key={n} className="flex items-center gap-2.5">
-                  <Initials text={i} tone={t as "accent" | "muted"} size="size-8" />
+                  <Initials text={i ?? ""} tone={t as "accent" | "muted"} size="size-8" />
                   <span className="min-w-0 flex-1 truncate text-sm font-medium">{n}</span>
                   <span className="type-small text-muted-foreground">{f}</span>
                 </li>
