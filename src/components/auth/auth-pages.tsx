@@ -88,7 +88,7 @@ function AuthFrame({
   );
 }
 
-function FieldError({ id, children }: { id: string; children?: string }) {
+function FieldError({ id, children }: { id: string; children?: string | undefined }) {
   if (!children) return null;
   return <p id={id} className="type-small text-destructive" role="alert">{children}</p>;
 }
@@ -107,8 +107,8 @@ function PasswordInput({
   value: string;
   onChange: (value: string) => void;
   autoComplete: string;
-  error?: string;
-  describedBy?: string;
+  error?: string | undefined;
+  describedBy?: string | undefined;
 }) {
   const [visible, setVisible] = useState(false);
   const errorId = `${id}-error`;
@@ -154,7 +154,7 @@ function EmailInput({
   id?: string;
   value: string;
   onChange: (value: string) => void;
-  error?: string;
+  error?: string | undefined;
 }) {
   const errorId = `${id}-error`;
   return (
@@ -202,7 +202,7 @@ export function SignUpPage() {
     event.preventDefault();
     const result = signUpSchema.safeParse(form);
     if (!result.success) {
-      setErrors(issueMessages(result.error));
+    setErrors(issueMessages(result.error));
       return;
     }
     setErrors({});
@@ -228,14 +228,14 @@ export function SignUpPage() {
             autoComplete="name"
             required
             maxLength={100}
-            aria-invalid={Boolean(errors.fullName)}
-            aria-describedby={errors.fullName ? "full-name-error" : undefined}
+            aria-invalid={Boolean(errors["fullName"])}
+            aria-describedby={errors["fullName"] ? "full-name-error" : undefined}
             className={`h-11 ${errors.fullName ? "border-destructive focus-visible:ring-destructive" : ""}`}
           />
-          <FieldError id="full-name-error">{errors.fullName}</FieldError>
+          <FieldError id="full-name-error">{errors["fullName"]}</FieldError>
         </div>
 
-        <EmailInput value={form.email} onChange={(email) => setForm((current) => ({ ...current, email }))} error={errors.email} />
+        <EmailInput value={form.email} onChange={(email) => setForm((current) => ({ ...current, email }))} error={errors["email"]} />
 
         <div className="space-y-2">
           <PasswordInput
@@ -244,7 +244,7 @@ export function SignUpPage() {
             value={form.password}
             onChange={(password) => setForm((current) => ({ ...current, password }))}
             autoComplete="new-password"
-            error={errors.password}
+            error={errors["password"]}
             describedBy="password-rules"
           />
           <PasswordRules password={form.password} />
@@ -256,7 +256,7 @@ export function SignUpPage() {
           value={form.confirmPassword}
           onChange={(confirmPassword) => setForm((current) => ({ ...current, confirmPassword }))}
           autoComplete="new-password"
-          error={errors.confirmPassword}
+          error={errors["confirmPassword"]}
         />
 
         <Button type="submit" size="lg" className="mt-2 w-full" disabled={loading}>
@@ -300,14 +300,14 @@ export function SignInPage() {
   return (
     <AuthFrame eyebrow="SIGN IN" title="Welcome back" description="Sign in to continue where you left off.">
       <form noValidate onSubmit={handleSubmit} className="space-y-4">
-        <EmailInput value={form.email} onChange={(email) => setForm((current) => ({ ...current, email }))} error={errors.email} />
+        <EmailInput value={form.email} onChange={(email) => setForm((current) => ({ ...current, email }))} error={errors["email"]} />
         <PasswordInput
           id="sign-in-password"
           label="Password"
           value={form.password}
           onChange={(password) => setForm((current) => ({ ...current, password }))}
           autoComplete="current-password"
-          error={errors.password}
+          error={errors["password"]}
         />
         <div className="flex justify-end">
           <Link to="/forgot-password" className="text-sm font-medium text-foreground underline decoration-accent-ink underline-offset-4">Forgot password?</Link>
@@ -349,7 +349,7 @@ export function ForgotPasswordPage() {
     event.preventDefault();
     const result = recoverySchema.safeParse({ email });
     if (!result.success) {
-      setError(issueMessages(result.error).email ?? "Enter a valid email address.");
+      setError(issueMessages(result.error)["email"] ?? "Enter a valid email address.");
       return;
     }
     setError("");
