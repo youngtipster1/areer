@@ -1,6 +1,6 @@
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Check, CheckCircle2, Eye, EyeOff, LoaderCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, CheckCircle2, Compass, Eye, EyeOff, Handshake, Layers2, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -12,6 +12,12 @@ import {
   signInSchema,
   signUpSchema,
 } from "@/lib/auth-validation";
+import {
+  isParticipationIntent,
+  PARTICIPATION_INTENT_STORAGE_KEY,
+  participationIntentOptions,
+  type ParticipationIntent,
+} from "@/lib/participation-intent";
 
 type FieldErrors = Record<string, string>;
 
