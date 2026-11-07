@@ -1,6 +1,6 @@
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Check, CheckCircle2, Eye, EyeOff, LoaderCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, CheckCircle2, Compass, Eye, EyeOff, Handshake, Layers2, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -12,6 +12,12 @@ import {
   signInSchema,
   signUpSchema,
 } from "@/lib/auth-validation";
+import {
+  isParticipationIntent,
+  PARTICIPATION_INTENT_STORAGE_KEY,
+  participationIntentOptions,
+  type ParticipationIntent,
+} from "@/lib/participation-intent";
 
 type FieldErrors = Record<string, string>;
 
@@ -407,14 +413,110 @@ export function AccountCreatedPage() {
   );
 }
 
-export function OnboardingPlaceholderPage() {
+const intentIcons = {
+  opportunities: Compass,
+  collaborate: Handshake,
+  both: Layers2,
+} as const;
+
+export function OnboardingIntentPage() {
+  const navigate = useNavigate();
+  const [intent, setIntent] = useState<ParticipationIntent | null>(null);
+
+  useEffect(() => {
+    try {
+      const storedIntent = window.localStorage.getItem(PARTICIPATION_INTENT_STORAGE_KEY);
+      if (isParticipationIntent(storedIntent)) setIntent(storedIntent);
+    } catch {
+      // Local storage can be unavailable; the current page selection still works.
+    }
+  }, []);
+
+  function selectIntent(value: string) {
+    if (!isParticipationIntent(value)) return;
+    setIntent(value);
+    try {
+      window.localStorage.setItem(PARTICIPATION_INTENT_STORAGE_KEY, value);
+    } catch {
+      // Keep the selection in memory if this browser blocks local storage.
+    }
+  }
+
+  async function handleContinue(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!intent) return;
+    await navigate({ to: "/onboarding/next", search: { intent } });
+  }
+
   return (
-    <AuthFrame eyebrow="NEXT STEP" title="Set up your next step." description="This is where your Foundareer setup will begin. The onboarding experience is not part of this prototype yet.">
+    <AuthFrame
+      eyebrow="YOUR STARTING POINT"
+      title="How would you like to use Areer?"
+      description="Areer helps people find meaningful opportunities and helps founders find people to build with. Choose where you'd like to start."
+    >
+      <form onSubmit={handleContinue}>
+        <fieldset className="space-y-3">
+          <legend className="sr-only">Choose how you would like to participate</legend>
+          {participationIntentOptions.map((option) => {
+            const Icon = intentIcons[option.value];
+            const selected = intent === option.value;
+            return (
+              <label key={option.value} className="block cursor-pointer">
+                <input
+                  type="radio"
+                  name="participation-intent"
+                  value={option.value}
+                  checked={selected}
+                  onChange={(event) => selectIntent(event.currentTarget.value)}
+                  aria-describedby={`intent-${option.value}-description`}
+                  className="peer sr-only"
+                />
+                <span className="flex min-h-[104px] items-start gap-4 rounded-md border border-border bg-card p-4 transition-colors hover:border-border-strong peer-checked:border-accent-ink peer-checked:bg-accent-soft/50 peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background sm:p-5">
+                  <span className="mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-md bg-secondary text-foreground" aria-hidden>
+                    <Icon className="size-5" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-center justify-between gap-3">
+                      <span className="font-display text-base font-semibold">{option.label}</span>
+                      {selected && <CheckCircle2 className="size-5 shrink-0 text-accent-ink" aria-hidden />}
+                    </span>
+                    <span id={`intent-${option.value}-description`} className="type-small mt-1 block text-muted-foreground">
+                      {option.description}
+                    </span>
+                  </span>
+                </span>
+              </label>
+            );
+          })}
+        </fieldset>
+        <p className="type-small mt-4 text-muted-foreground">This is just where you’ll begin. You can explore both paths and change your starting preference later.</p>
+        <Button type="submit" size="lg" className="mt-5 w-full" disabled={!intent}>
+          Continue<ArrowRight />
+        </Button>
+      </form>
+    </AuthFrame>
+  );
+}
+
+export function OnboardingDestinationPage({ intent }: { intent: ParticipationIntent | null }) {
+  const destination = intent
+    ? participationIntentOptions.find((option) => option.value === intent)
+    : undefined;
+
+  return (
+    <AuthFrame
+      eyebrow="NEXT STEP"
+      title={destination ? `Start with ${destination.label.toLowerCase()}.` : "Your next step starts here."}
+      description={destination ? destination.description : "Choose a starting point for your Areer experience."}
+    >
       <div className="border-y border-border py-4">
-        <p className="text-sm font-medium">Your account is ready for setup.</p>
-        <p className="type-small mt-1 text-muted-foreground">No profile details have been saved.</p>
+        <p className="text-sm font-medium">Your selection is a starting preference, not a permanent role.</p>
+        <p className="type-small mt-1 text-muted-foreground">Both participation paths remain open, and you can change where you start at any time.</p>
       </div>
-      <Button asChild variant="outline" className="mt-6 w-full"><Link to="/">Explore Foundareer<ArrowRight /></Link></Button>
+      <div className="mt-6 grid gap-3">
+        <Button asChild size="lg" className="w-full"><Link to="/onboarding">Change starting preference<ArrowRight /></Link></Button>
+        <Button asChild variant="outline" className="w-full"><Link to="/"><ArrowLeft />Explore Foundareer</Link></Button>
+      </div>
     </AuthFrame>
   );
 }

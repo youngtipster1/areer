@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep the mock authentication flows in `src/components/auth/auth-pages.tsx` with validation isolated in `src/lib/auth-validation.ts`; thin route files keep each step directly addressable without adding a backend.
+- Store the onboarding participation intent only as a changeable browser-local preference, never as an account role, so the prototype stays backend-free and both paths remain available.
