@@ -32,7 +32,7 @@ function Cap({ name, level }: { name: string; level?: "required" | "helpful" | "
 
 export function DomainSection() {
   return (
-    <Section id="patterns" index="03 — Patterns" title="Foundareer patterns" intro="Component concepts specific to the platform: identity built on capability and evidence, needs built on contribution.">
+    <Section id="patterns" index="03 — Patterns" title="Areer patterns" intro="Component concepts specific to the platform: identity built on capability and evidence, needs built on contribution.">
       <Group title="Career identity" note="Who someone is becoming, not just a CV.">
         <Card className="p-0">
           <div className="grid gap-6 p-5 sm:p-6 md:grid-cols-[minmax(0,1fr)_260px]">

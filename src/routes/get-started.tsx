@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PlaceholderPage } from "@/components/landing/placeholder-page";
+import { useEffect } from "react";
+import { SignUpPage } from "@/components/auth/auth-pages";
+import { PARTICIPATION_INTENT_STORAGE_KEY, type ParticipationIntent } from "@/lib/participation-intent";
 
 type Search = { as?: "talent" | "organisation" | undefined };
 
@@ -10,10 +12,10 @@ export const Route = createFileRoute("/get-started")({
   },
   head: () => ({
     meta: [
-      { title: "Get started — Foundareer" },
-      { name: "description", content: "Start on Foundareer as talent or as a founder building a team." },
-      { property: "og:title", content: "Get started — Foundareer" },
-      { property: "og:description", content: "Start on Foundareer as talent or as a founder." },
+      { title: "Create your account — Areer" },
+      { name: "description", content: "Create an Areer account and choose how you would like to participate." },
+      { property: "og:title", content: "Create your account — Areer" },
+      { property: "og:description", content: "Create an Areer account and choose how you would like to participate." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -23,9 +25,19 @@ export const Route = createFileRoute("/get-started")({
 
 function GetStarted() {
   const { as } = Route.useSearch();
-  const title =
-    as === "talent" ? "Talent onboarding is coming soon." : as === "organisation" ? "Organisation onboarding is coming soon." : "Onboarding is coming soon.";
-  return (
-    <PlaceholderPage overline="Get started" title={title} body="Sign-up flows will be designed after the landing page is reviewed and approved." />
-  );
+  useEffect(() => {
+    const initialIntent: ParticipationIntent | null = as === "talent"
+      ? "opportunities"
+      : as === "organisation"
+        ? "collaborate"
+        : null;
+    if (!initialIntent) return;
+    try {
+      window.localStorage.setItem(PARTICIPATION_INTENT_STORAGE_KEY, initialIntent);
+    } catch {
+      // The onboarding choice still works if browser storage is unavailable.
+    }
+  }, [as]);
+
+  return <SignUpPage />;
 }

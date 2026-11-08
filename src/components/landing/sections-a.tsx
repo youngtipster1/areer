@@ -54,7 +54,7 @@ export function Hero() {
             Find your place in the work that <span className="accent-rule">matters.</span>
           </h1>
           <p className="type-body-lg mt-5 max-w-[36rem] text-muted-foreground">
-            Discover projects and opportunities where your skills can make a difference. Foundareer helps you show what you can do, find people who need your capabilities, and take the next step towards the future you want to build.
+            Discover projects and opportunities where your skills can make a difference. Areer helps you show what you can do, find people who need your capabilities, and take the next step towards the future you want to build.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg">

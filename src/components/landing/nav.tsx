@@ -14,7 +14,7 @@ export const navLinks = [
 export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={cn("font-display text-xl font-extrabold tracking-tight", className)}>
-      foundareer<span className="text-accent-ink">.</span>
+      Areer<span className="text-accent-ink">.</span>
     </span>
   );
 }
@@ -45,7 +45,7 @@ export function LandingNav() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-[1200px] items-center gap-6 px-4 sm:px-6">
-        <Link to="/" aria-label="Foundareer home" className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <Link to="/" aria-label="Areer home" className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           <Wordmark />
         </Link>
         <nav aria-label="Main" className="mx-auto hidden items-center gap-1 lg:flex">

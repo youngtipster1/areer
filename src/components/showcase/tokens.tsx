@@ -20,7 +20,7 @@ const type = [
   { cls: "type-h1", label: "H1 · Manrope 700", spec: "28 → 40 / 1.15", text: "Contribute to real initiatives" },
   { cls: "type-h2", label: "H2 · Manrope 700", spec: "22 → 28 / 1.25", text: "Your career identity" },
   { cls: "type-h3", label: "H3 · Manrope 600", spec: "18 / 1.35", text: "Capability groups" },
-  { cls: "type-body-lg", label: "Body large · Inter 400", spec: "17 / 1.65", text: "Foundareer helps founders find people who can genuinely move their work forward." },
+  { cls: "type-body-lg", label: "Body large · Inter 400", spec: "17 / 1.65", text: "Areer helps founders find people who can genuinely move their work forward." },
   { cls: "", label: "Body · Inter 400", spec: "15 / 1.6", text: "Show what you can do, the evidence behind it, and where you want to grow." },
   { cls: "type-small text-muted-foreground", label: "Small · Inter 400", spec: "13 / 1.5", text: "Helper text, metadata and timestamps." },
   { cls: "type-overline text-muted-foreground", label: "Overline · Inter 600", spec: "11 / +12%", text: "Section label" },

@@ -45,12 +45,12 @@ function AuthFrame({
     <main className="min-h-svh bg-background text-foreground">
       <header className="border-b border-border">
         <div className="mx-auto flex h-[4.5rem] max-w-[1200px] items-center justify-between px-4 sm:px-6">
-          <Link to="/" aria-label="Foundareer home" className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <Link to="/" aria-label="Areer home" className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <Wordmark />
           </Link>
           <Link to="/" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
             <ArrowLeft className="size-4" aria-hidden />
-            <span className="hidden sm:inline">Back to Foundareer</span>
+            <span className="hidden sm:inline">Back to Areer</span>
             <span className="sm:hidden">Home</span>
           </Link>
         </div>
@@ -64,7 +64,7 @@ function AuthFrame({
               Built around what people can contribute.
             </p>
             <p className="mt-4 max-w-sm text-sm leading-6 text-primary-foreground/75">
-              Capability, evidence and direction sit at the centre of Foundareer.
+              Capability, evidence and direction sit at the centre of Areer.
             </p>
           </div>
           <div className="grid grid-cols-3 divide-x divide-primary-foreground/20 border-t border-primary-foreground/20 pt-5">
@@ -208,7 +208,7 @@ export function SignUpPage() {
     event.preventDefault();
     const result = signUpSchema.safeParse(form);
     if (!result.success) {
-    setErrors(issueMessages(result.error));
+      setErrors(issueMessages(result.error));
       return;
     }
     setErrors({});
@@ -221,7 +221,7 @@ export function SignUpPage() {
   return (
     <AuthFrame
       eyebrow="CREATE ACCOUNT"
-      title="Create your Foundareer account"
+      title="Create your Areer account"
       description="Start connecting what you can do with opportunities and people who need your capabilities."
     >
       <form noValidate onSubmit={handleSubmit} className="space-y-4">
@@ -276,7 +276,7 @@ export function SignUpPage() {
   );
 }
 
-const MOCK_CREDENTIALS = { email: "demo@foundareer.test", password: "AreerDemo26" };
+const MOCK_CREDENTIALS = { email: "demo@areer.test", password: "AreerDemo26" };
 
 export function SignInPage() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -339,7 +339,7 @@ export function SignInPage() {
         <p className="type-small text-muted-foreground">Password: <span className="font-medium text-foreground">{MOCK_CREDENTIALS.password}</span></p>
       </div>
       <p className="mt-5 text-center text-sm text-muted-foreground">
-        New to Foundareer? <Link to="/sign-up" className="font-semibold text-foreground underline decoration-accent-ink underline-offset-4">Create an account</Link>
+        New to Areer? <Link to="/sign-up" className="font-semibold text-foreground underline decoration-accent-ink underline-offset-4">Create an account</Link>
       </p>
     </AuthFrame>
   );
@@ -387,7 +387,7 @@ export function ForgotPasswordPage() {
     <AuthFrame
       eyebrow="PASSWORD RECOVERY"
       title="Forgot your password?"
-      description="Enter the email address associated with your Foundareer account. We'll show you the next step."
+      description="Enter the email address associated with your Areer account. We'll show you the next step."
     >
       <form noValidate onSubmit={handleSubmit} className="space-y-5">
         <EmailInput value={email} onChange={(value) => setEmail(value)} error={error || undefined} />
@@ -404,7 +404,7 @@ export function ForgotPasswordPage() {
 
 export function AccountCreatedPage() {
   return (
-    <AuthFrame eyebrow="ACCOUNT CREATED" title="Your Foundareer account is ready." description="Your next step is to set up how you want to use Foundareer and what you want to achieve here.">
+    <AuthFrame eyebrow="ACCOUNT CREATED" title="Your Areer account is ready." description="Your next step is to set up how you want to use Areer and what you want to achieve here.">
       <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-accent-soft text-accent-ink" aria-hidden>
         <CheckCircle2 className="size-6" />
       </div>
@@ -515,7 +515,7 @@ export function OnboardingDestinationPage({ intent }: { intent: ParticipationInt
       </div>
       <div className="mt-6 grid gap-3">
         <Button asChild size="lg" className="w-full"><Link to="/onboarding">Change starting preference<ArrowRight /></Link></Button>
-        <Button asChild variant="outline" className="w-full"><Link to="/"><ArrowLeft />Explore Foundareer</Link></Button>
+        <Button asChild variant="outline" className="w-full"><Link to="/"><ArrowLeft />Explore Areer</Link></Button>
       </div>
     </AuthFrame>
   );

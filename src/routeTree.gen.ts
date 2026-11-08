@@ -10,13 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccountCreatedRouteImport } from './routes/account-created'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as GetStartedRouteImport } from './routes/get-started'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as SignInRouteImport } from './routes/sign-in'
+import { Route as SignUpRouteImport } from './routes/sign-up'
+import { Route as OnboardingNextRouteImport } from './routes/onboarding.next'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountCreatedRoute = AccountCreatedRouteImport.update({
+  id: '/account-created',
+  path: '/account-created',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesignSystemRoute = DesignSystemRouteImport.update({
@@ -24,9 +34,19 @@ const DesignSystemRoute = DesignSystemRouteImport.update({
   path: '/design-system',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GetStartedRoute = GetStartedRouteImport.update({
   id: '/get-started',
   path: '/get-started',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignInRoute = SignInRouteImport.update({
@@ -34,39 +54,96 @@ const SignInRoute = SignInRouteImport.update({
   path: '/sign-in',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SignUpRoute = SignUpRouteImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingNextRoute = OnboardingNextRouteImport.update({
+  id: '/next',
+  path: '/next',
+  getParentRoute: () => OnboardingRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account-created': typeof AccountCreatedRoute
   '/design-system': typeof DesignSystemRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/get-started': typeof GetStartedRoute
+  '/onboarding': typeof OnboardingRouteWithChildren
   '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
+  '/onboarding/next': typeof OnboardingNextRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account-created': typeof AccountCreatedRoute
   '/design-system': typeof DesignSystemRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/get-started': typeof GetStartedRoute
+  '/onboarding': typeof OnboardingRouteWithChildren
   '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
+  '/onboarding/next': typeof OnboardingNextRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account-created': typeof AccountCreatedRoute
   '/design-system': typeof DesignSystemRoute
+  '/forgot-password': typeof ForgotPasswordRoute
   '/get-started': typeof GetStartedRoute
+  '/onboarding': typeof OnboardingRouteWithChildren
   '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
+  '/onboarding/next': typeof OnboardingNextRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/design-system' | '/get-started' | '/sign-in'
+  fullPaths:
+    | '/'
+    | '/account-created'
+    | '/design-system'
+    | '/forgot-password'
+    | '/get-started'
+    | '/onboarding'
+    | '/sign-in'
+    | '/sign-up'
+    | '/onboarding/next'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/design-system' | '/get-started' | '/sign-in'
-  id: '__root__' | '/' | '/design-system' | '/get-started' | '/sign-in'
+  to:
+    | '/'
+    | '/account-created'
+    | '/design-system'
+    | '/forgot-password'
+    | '/get-started'
+    | '/onboarding'
+    | '/sign-in'
+    | '/sign-up'
+    | '/onboarding/next'
+  id:
+    | '__root__'
+    | '/'
+    | '/account-created'
+    | '/design-system'
+    | '/forgot-password'
+    | '/get-started'
+    | '/onboarding'
+    | '/sign-in'
+    | '/sign-up'
+    | '/onboarding/next'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountCreatedRoute: typeof AccountCreatedRoute
   DesignSystemRoute: typeof DesignSystemRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
   GetStartedRoute: typeof GetStartedRoute
+  OnboardingRoute: typeof OnboardingRouteWithChildren
   SignInRoute: typeof SignInRoute
+  SignUpRoute: typeof SignUpRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -78,11 +155,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account-created': {
+      id: '/account-created'
+      path: '/account-created'
+      fullPath: '/account-created'
+      preLoaderRoute: typeof AccountCreatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/design-system': {
       id: '/design-system'
       path: '/design-system'
       fullPath: '/design-system'
       preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/get-started': {
@@ -92,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GetStartedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sign-in': {
       id: '/sign-in'
       path: '/sign-in'
@@ -99,14 +197,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignInRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sign-up': {
+      id: '/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof SignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/next': {
+      id: '/onboarding/next'
+      path: '/next'
+      fullPath: '/onboarding/next'
+      preLoaderRoute: typeof OnboardingNextRouteImport
+      parentRoute: typeof OnboardingRoute
+    }
   }
 }
 
+interface OnboardingRouteChildren {
+  OnboardingNextRoute: typeof OnboardingNextRoute
+}
+
+const OnboardingRouteChildren: OnboardingRouteChildren = {
+  OnboardingNextRoute: OnboardingNextRoute,
+}
+
+const OnboardingRouteWithChildren = OnboardingRoute._addFileChildren(
+  OnboardingRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountCreatedRoute: AccountCreatedRoute,
   DesignSystemRoute: DesignSystemRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
   GetStartedRoute: GetStartedRoute,
+  OnboardingRoute: OnboardingRouteWithChildren,
   SignInRoute: SignInRoute,
+  SignUpRoute: SignUpRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

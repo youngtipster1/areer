@@ -117,7 +117,7 @@ export function Opportunities() {
             </h2>
           </div>
           <p className="opacity-75 lg:col-span-5 lg:self-end">
-            Opportunities on Foundareer can be organised around projects, initiatives and specific outcomes — so you know what you'd actually do, what it needs, and what success looks like. The examples below are illustrative.
+            Opportunities on Areer can be organised around projects, initiatives and specific outcomes — so you know what you'd actually do, what it needs, and what success looks like. The examples below are illustrative.
           </p>
         </div>
         <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -182,7 +182,7 @@ export function Different() {
     <section aria-labelledby="diff-title" className="border-t border-border bg-secondary">
       <Container className="grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <Eyebrow>Why Foundareer</Eyebrow>
+          <Eyebrow>Why Areer</Eyebrow>
           <h2 id="diff-title" className="type-h1 mt-4 text-balance">A better starting point for finding the right fit.</h2>
         </div>
         <ul className="divide-y divide-border border-y border-border lg:col-span-8">
@@ -252,7 +252,7 @@ export function LandingFooter() {
           </ul>
         </nav>
       </Container>
-      <Container className="type-small border-t border-border py-5 text-muted-foreground">© {new Date().getFullYear()} Foundareer. Prototype — examples shown are illustrative.</Container>
+      <Container className="type-small border-t border-border py-5 text-muted-foreground">© {new Date().getFullYear()} Areer. Prototype — examples shown are illustrative.</Container>
     </footer>
   );
 }
