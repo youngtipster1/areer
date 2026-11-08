@@ -236,7 +236,7 @@ export function SignUpPage() {
             maxLength={100}
             aria-invalid={Boolean(errors["fullName"])}
             aria-describedby={errors["fullName"] ? "full-name-error" : undefined}
-            className={`h-11 ${errors.fullName ? "border-destructive focus-visible:ring-destructive" : ""}`}
+            className={`h-11 ${errors["fullName"] ? "border-destructive focus-visible:ring-destructive" : ""}`}
           />
           <FieldError id="full-name-error">{errors["fullName"]}</FieldError>
         </div>
