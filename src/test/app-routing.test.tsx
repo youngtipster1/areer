@@ -14,4 +14,18 @@ describe("App routing", () => {
 
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
+
+  it.each([
+    "/sign-in",
+    "/sign-up",
+    "/forgot-password",
+    "/account-created",
+    "/onboarding",
+    "/onboarding/next",
+  ])("matches the direct authentication flow route %s", (path) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    const matches = router.matchRoutes(path);
+
+    expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
+  });
 });

@@ -1,4 +1,5 @@
-- [ ] Implement the mock sign-up, sign-in, recovery, account-created, and onboarding screens.
-- [ ] Connect visible landing-page entry points and add direct routes for each authentication step.
+- [x] Implement the mock sign-up, sign-in, recovery, account-created, and onboarding screens.
+- [x] Connect visible landing-page entry points and add direct routes for each authentication step.
 - [ ] Verify form states, route navigation, responsive presentation, and existing landing behavior.
-- [ ] Implement the onboarding participation-intent selection and minimal destination placeholders from the latest brief.
+- [x] Implement the onboarding participation-intent selection and minimal destination placeholders from the latest brief.
+- [x] Rename the visible product and project name to Areer.
