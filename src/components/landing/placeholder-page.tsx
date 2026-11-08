@@ -7,7 +7,7 @@ export function PlaceholderPage({ overline, title, body }: { overline: string; t
     <main className="flex min-h-screen items-center bg-background px-4 sm:px-6">
       <div className="mx-auto w-full max-w-xl">
         <Link to="/" className="font-display text-lg font-extrabold tracking-tight">
-          foundareer<span className="text-accent-ink">.</span>
+          Areer<span className="text-accent-ink">.</span>
         </Link>
         <p className="type-overline mt-16 text-muted-foreground">{overline} · Prototype placeholder</p>
         <h1 className="type-h1 mt-3">{title}</h1>

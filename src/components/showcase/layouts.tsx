@@ -11,7 +11,7 @@ function Frame({ label, children, className = "" }: { label: string; children: R
   );
 }
 const Bar = ({ w = "w-full", h = "h-2", tone = "bg-border" }: { w?: string; h?: string; tone?: string }) => <div className={`${h} ${w} rounded-sm ${tone}`} />;
-const Logo = () => <span className="font-display text-sm font-extrabold tracking-tight">foundareer<span className="text-accent-ink">.</span></span>;
+const Logo = () => <span className="font-display text-sm font-extrabold tracking-tight">Areer<span className="text-accent-ink">.</span></span>;
 
 export function LayoutsSection() {
   return (

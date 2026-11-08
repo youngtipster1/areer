@@ -6,12 +6,12 @@ import { FounderSection, Opportunities, HowItWorks, Different, Closing, LandingF
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Foundareer — Find your place in the work that matters" },
+      { title: "Areer — Find your place in the work that matters" },
       {
         name: "description",
-        content: "Foundareer connects people with founders and organisations based on what they can contribute, what they want to achieve and what the work requires.",
+        content: "Areer connects people with founders and organisations based on what they can contribute, what they want to achieve and what the work requires.",
       },
-      { property: "og:title", content: "Foundareer — Find your place in the work that matters" },
+      { property: "og:title", content: "Areer — Find your place in the work that matters" },
       { property: "og:description", content: "Connecting capabilities and ambitions with founders who need people like you." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

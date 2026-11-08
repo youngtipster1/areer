@@ -10,10 +10,10 @@ import { LayoutsSection } from "@/components/showcase/layouts";
 export const Route = createFileRoute("/design-system")({
   head: () => ({
     meta: [
-      { title: "Foundareer — Visual Design Foundation" },
-      { name: "description", content: "Design tokens, components, patterns and layouts for the Foundareer interface." },
-      { property: "og:title", content: "Foundareer — Visual Design Foundation" },
-      { property: "og:description", content: "The reference design system for the Foundareer platform." },
+      { title: "Areer — Visual Design Foundation" },
+      { name: "description", content: "Design tokens, components, patterns and layouts for the Areer interface." },
+      { property: "og:title", content: "Areer — Visual Design Foundation" },
+      { property: "og:description", content: "The reference design system for the Areer platform." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -38,7 +38,7 @@ function Showcase() {
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
         <div className="mx-auto grid max-w-[1200px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:flex sm:px-6">
-          <span className="truncate font-display text-lg font-extrabold tracking-tight">foundareer<span className="text-accent-ink">.</span> <span className="type-small font-sans font-medium text-muted-foreground">Design system</span></span>
+          <span className="truncate font-display text-lg font-extrabold tracking-tight">Areer<span className="text-accent-ink">.</span> <span className="type-small font-sans font-medium text-muted-foreground">Design system</span></span>
           <nav className="ml-auto hidden items-center gap-1 text-sm md:flex">
             {nav.map(([id, l]) => (
               <a key={id} href={`#${id}`} className="rounded-md px-3 py-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">{l}</a>
@@ -76,7 +76,7 @@ function Showcase() {
         <ComponentsSection />
         <DomainSection />
         <LayoutsSection />
-        <footer className="type-small border-t border-border py-10 text-muted-foreground">Foundareer visual foundation · reference for frontend implementation.</footer>
+        <footer className="type-small border-t border-border py-10 text-muted-foreground">Areer visual foundation · reference for frontend implementation.</footer>
       </main>
     </div>
   );

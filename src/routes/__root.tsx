@@ -78,8 +78,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Foundareer" },
-      { name: "description", content: "Foundareer connects talent with founders and organisations." },
+      { title: "Areer" },
+      { name: "description", content: "Areer connects talent with founders and organisations." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
