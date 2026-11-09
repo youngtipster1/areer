@@ -27,9 +27,9 @@ function GetStarted() {
   const { as } = Route.useSearch();
   useEffect(() => {
     const initialIntent: ParticipationIntent | null = as === "talent"
-      ? "opportunities"
+      ? "find_opportunities"
       : as === "organisation"
-        ? "collaborate"
+        ? "build_with_others"
         : null;
     if (!initialIntent) return;
     try {
