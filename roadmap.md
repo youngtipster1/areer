@@ -2,4 +2,5 @@
 - [x] Connect visible landing-page entry points and add direct routes for each authentication step.
 - [ ] Verify form states, route navigation, responsive presentation, and existing landing behavior.
 - [x] Implement the onboarding participation-intent selection and minimal destination placeholders from the latest brief.
+- [ ] Implement the exact participation preference content, destination mapping, and responsive onboarding flow from the latest brief.
 - [x] Rename the visible product and project name to Areer.

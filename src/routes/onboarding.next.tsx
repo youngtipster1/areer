@@ -1,11 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { OnboardingDestinationPage } from "@/components/auth/auth-pages";
-import { isParticipationIntent, type ParticipationIntent } from "@/lib/participation-intent";
+import { validateParticipationIntentSearch } from "@/lib/participation-intent";
 
 export const Route = createFileRoute("/onboarding/next")({
-  validateSearch: (search: Record<string, unknown>): { intent: ParticipationIntent | null } => ({
-    intent: isParticipationIntent(search["intent"]) ? search["intent"] : null,
-  }),
+  validateSearch: validateParticipationIntentSearch,
   head: () => ({
     meta: [
       { title: "Your next step — Areer" },
