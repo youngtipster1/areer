@@ -10,7 +10,13 @@ export type Question = {
 
 export type StepDefinition = { id: string; title: string; description: string; questions: Question[] };
 
-const q = (key: string, label: string, kind: Question["kind"], options?: string[], extra: Partial<Question> = {}): Question => ({ key, label, kind, options, ...extra });
+const q = (key: string, label: string, kind: Question["kind"], options?: string[], extra: Partial<Question> = {}): Question => ({
+  key,
+  label,
+  kind,
+  ...(options ? { options } : {}),
+  ...extra,
+});
 
 export const talentSteps: StepDefinition[] = [
   { id: "context", title: "Let's start with you.", description: "Tell us a little about yourself so we can understand your background and the opportunities that may be relevant to you.", questions: [
