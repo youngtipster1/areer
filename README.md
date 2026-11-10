@@ -1,16 +1,35 @@
 # Areer
 
-Implement exactly the screenshot and nothing else
+**Connecting people's capabilities with meaningful opportunities to contribute.**
 
-This project was built with [Lovable](https://lovable.dev).
+Areer is a platform that connects talented individuals with founders, teams, and organisations building products, projects, and initiatives.
 
-## Build with Lovable
+It helps people discover opportunities, demonstrate their capabilities, gain experience, and build meaningful connections through contribution.
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/fb1b2851-23c8-44ee-a7d5-2b7ef0af6d47).
+## Core Concept
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+Career Identity → Capability → Evidence → Discovery → Fit → Connection → Contribution.
+
+## Platform
+
+Areer brings together two complementary experiences:
+
+- **For Talent:** Discover opportunities, showcase capabilities, collaborate, and build experience.
+- **For Founders & Organisations:** Discover people with relevant capabilities, find collaborators, and build teams around ideas and initiatives.
+
+## Development Status
+
+<escape>🚧</escape> Currently in active development.
+
+The frontend prototype is being developed with mock data and simulated interactions before backend integration.
+
+## Vision
+
+To create a platform where people are discovered not just by their credentials, but by what they can do, what they are interested in, and what they can contribute.
+
+---
+
+**Areer — Capabilities into Contributions.**
 
 ## Development
 
