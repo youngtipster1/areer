@@ -285,10 +285,11 @@ export function SignUpPage() {
 const MOCK_CREDENTIALS = { email: "demo@areer.test", password: "AreerDemo26" };
 
 export function SignInPage() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [loading, setLoading] = useState(false);
-  const [outcome, setOutcome] = useState<"success" | "invalid" | null>(null);
+  const [outcome, setOutcome] = useState<"invalid" | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
