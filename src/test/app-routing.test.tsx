@@ -22,8 +22,6 @@ describe("App routing", () => {
     "/account-created",
     "/onboarding",
     "/onboarding/next",
-    "/onboarding/career-identity",
-    "/onboarding/founder",
   ])("matches the direct authentication flow route %s", (path) => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
     const matches = router.matchRoutes(path);

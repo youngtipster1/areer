@@ -43,7 +43,7 @@ function AuthFrame({
   children: ReactNode;
 }) {
   return (
-    <main className="min-h-svh bg-background text-foreground">
+    <main className="min-h-svh bg-secondary/50 text-foreground">
       <header className="border-b border-border">
         <div className="mx-auto flex h-[4.5rem] max-w-[1200px] items-center justify-between px-4 sm:px-6">
           <Link to="/" aria-label="Areer home" className="rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
@@ -57,18 +57,21 @@ function AuthFrame({
         </div>
       </header>
 
-      <div className="mx-auto grid w-full max-w-[1120px] grid-cols-1 px-4 py-6 sm:px-6 sm:py-8 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch lg:py-10">
-        <aside className="relative hidden flex-col justify-between overflow-hidden rounded-l-lg bg-primary p-8 text-primary-foreground lg:flex xl:p-10">
+      <div className="mx-auto w-full max-w-[1120px] px-4 py-5 sm:px-6 sm:py-8 lg:py-10">
+        <div className="grid overflow-hidden rounded-lg border border-border bg-card shadow-md lg:min-h-[calc(100svh-10rem)] lg:grid-cols-[0.9fr_1.1fr]">
+        <aside className="relative hidden flex-col justify-between bg-primary p-8 text-primary-foreground lg:flex xl:p-10">
           <div>
             <p className="type-overline text-accent">A different way to connect</p>
             <p className="mt-8 max-w-sm font-display text-3xl font-bold leading-tight xl:text-4xl">
-              Built around what people can contribute.
+              See the value in what you bring.
             </p>
             <p className="mt-4 max-w-sm text-sm leading-6 text-primary-foreground/75">
-              Capability, evidence and direction sit at the centre of Areer.
+              Areer brings your capabilities, evidence and direction into focus—so your next step starts with what you can contribute.
             </p>
           </div>
-          <div className="grid grid-cols-3 divide-x divide-primary-foreground/20 border-t border-primary-foreground/20 pt-5">
+          <div className="space-y-4 border-t border-primary-foreground/20 pt-5">
+            <p className="type-overline text-primary-foreground/60">A more complete picture</p>
+            <div className="grid grid-cols-3 divide-x divide-primary-foreground/20">
             {[
               ["01", "Capabilities"],
               ["02", "Evidence"],
@@ -79,17 +82,19 @@ function AuthFrame({
                 <p className="mt-1 text-xs font-medium text-primary-foreground/85">{label}</p>
               </div>
             ))}
+            </div>
           </div>
         </aside>
 
-        <section className="flex items-center justify-center lg:border-y lg:border-r lg:border-border lg:rounded-r-lg lg:bg-card">
-          <div className="w-full max-w-[440px] py-5 sm:py-8 lg:px-10 xl:px-14">
+        <section className="flex items-center justify-center px-5 py-7 sm:px-10 sm:py-9 lg:border-l lg:border-border lg:px-10 xl:px-14">
+          <div className="w-full max-w-[440px]">
             <p className="type-overline text-accent-ink">{eyebrow}</p>
             <h1 className="type-h1 mt-3 text-balance">{title}</h1>
             <p className="mt-3 text-sm leading-6 text-muted-foreground">{description}</p>
             <div className="mt-7">{children}</div>
           </div>
         </section>
+        </div>
       </div>
     </main>
   );
@@ -280,10 +285,11 @@ export function SignUpPage() {
 const MOCK_CREDENTIALS = { email: "demo@areer.test", password: "AreerDemo26" };
 
 export function SignInPage() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [loading, setLoading] = useState(false);
-  const [outcome, setOutcome] = useState<"success" | "invalid" | null>(null);
+  const [outcome, setOutcome] = useState<"invalid" | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -300,8 +306,12 @@ export function SignInPage() {
     const isDemoUser =
       result.data.email.toLowerCase() === MOCK_CREDENTIALS.email &&
       result.data.password === MOCK_CREDENTIALS.password;
-    setOutcome(isDemoUser ? "success" : "invalid");
     setLoading(false);
+    if (isDemoUser) {
+      await navigate({ to: "/onboarding" });
+      return;
+    }
+    setOutcome("invalid");
   }
 
   return (
@@ -325,11 +335,6 @@ export function SignInPage() {
         {outcome === "invalid" && (
           <p className="type-small rounded-md border border-destructive/30 bg-destructive-soft px-3 py-2.5 text-destructive" role="alert">
             Those details don’t match the demo account. Check the sample credentials below and try again.
-          </p>
-        )}
-        {outcome === "success" && (
-          <p className="type-small rounded-md border border-success/30 bg-success-soft px-3 py-2.5 text-success" role="status">
-            Demo sign-in successful. No account session was created.
           </p>
         )}
       </form>
@@ -446,12 +451,7 @@ export function OnboardingIntentPage() {
   async function handleContinue(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!intent) return;
-    const destination = getOnboardingDestination(intent);
-    if (destination === "founder") {
-      await navigate({ to: "/onboarding/founder", search: { intent } });
-      return;
-    }
-    await navigate({ to: "/onboarding/career-identity", search: { intent } });
+    await navigate({ to: "/onboarding/next", search: { intent } });
   }
 
   return (
